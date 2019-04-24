@@ -1,0 +1,66 @@
+main
+
+
+	
+; carrega o vetor
+	ldi r1,vet
+; carrega o primeiro elemento pra comparar
+	ldi r2,vet
+	ldi r3,5
+loop_menor
+; percore o vetor
+	add r1,2
+; compara os valores dos vetores
+	
+	ldi r4,0
+	slt r4,r2,r1
+; se for maior vai pro if, senao prossegue
+	bnz r4,if
+; caso de 0, fazer atribuicao
+	ldi r2,r1
+	stw r2,menor
+	sub r3,1
+	bnz r3,loop_menor
+	bez r3,loop
+; caso seja menor, atribuir ao r2
+
+if
+	sub r3,1
+	bnz r3,loop_menor
+	bez r3,loop
+
+loop
+	ldi r1,vet
+	ldi r2,vet
+	ldi r3,5
+loop_maior
+	add r1,2
+	
+	ldi r4,0
+	slt r4,r2,r1
+
+	bez r4,iff
+
+	sub r3,1
+	bnz r3,loop_maior
+	bez r3,fim
+
+
+iff
+	ldi r2,r1
+	stw r2,maior
+	sub r3,1
+	bnz r3,loop_maior
+	bez r3,fim
+
+fim
+	ldi r2,maior
+	ldi r3,menor
+	sub r4,r2,r3
+	stw r4,diferenca
+	hcf
+	
+vet 1 2 0 4 5
+menor 0
+maior 0
+diferenca 0
